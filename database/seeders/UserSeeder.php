@@ -32,10 +32,10 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('a'),
                 'level' => 3
             ],
-            
+
         ];
 
-        foreach($user as $key => $val){
+        foreach ($user as $key => $val) {
             User::create($val);
         }
     }

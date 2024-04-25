@@ -6,7 +6,6 @@ use App\Models\menu;
 use App\Http\Requests\StorestokRequest;
 use App\Http\Requests\UpdatestokRequest;
 use App\Models\stok;
-use App\Models\jenis;
 use Exception;
 use Illuminate\Database\QueryException;
 use PDOException;
@@ -52,25 +51,7 @@ class StokController extends Controller
         
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(stok $stok)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(stok $stok)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(UpdatestokRequest $request, string $id)
     {
         $stok = stok::find($id)->update($request->all());
@@ -82,8 +63,8 @@ class StokController extends Controller
      */
     public function destroy($id)
     {
-        menu::find($id)->delete();
-        return redirect('menu')->with('success', 'Data menu berhasil dihapus!');
+        stok::find($id)->delete();
+        return redirect('stok')->with('success', 'Data menu berhasil dihapus!');
     }
 
     public function exportData()
@@ -95,7 +76,15 @@ class StokController extends Controller
     public function importData(Request $request)
     {
         Excel::import(new StokImport, $request->import);
-        return redirect()->back()->with('success', 'Import data jenis berhasil');
+        return redirect()->back()->with('success', 'Import data stok berhasil');
     }
-       
+
+    public function generatepdf()
+    {
+        $stok = stok::all();
+        $pdf = Pdf::loadView('stok.table', compact('stok'));
+        return $pdf->download('stok.pdf');
+    }
 }
+       
+

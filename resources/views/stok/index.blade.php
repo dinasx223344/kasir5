@@ -42,6 +42,9 @@
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
                                     <i class=" fa fa-file-excel"></i> Import
                                 </button>
+                                <a href="{{ route('export-stok') }}" class="btn btn-danger">
+                                    <i class=" fa fa-file-pdf"></i> Export
+                                </a>
                             </div>
                             <div class="clearfix"></div>
                         </div>

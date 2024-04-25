@@ -68,11 +68,14 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-user"></i> ADMIN <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
+                                        <li><a href="{{ url('/kategori') }}">Kategori</a></li>
                                         <li><a href="{{ url('/jenis') }}">Jenis</a></li>
                                         <li><a href="{{ url('/menu') }}">Menu</a></li>
                                         <li><a href="{{ url('/stok') }}">Stok</a></li>
                                         <li><a href="{{ url('/pelanggan') }}">Pelanggan</a></li>
                                         <li><a href="{{ url('/meja') }}">Meja</a></li>
+                                        <li><a href="{{ url('/absensi') }}">Absensi Karyawan</a></li>
+                                        <li><a href="{{ url('/contact') }}">Contact Us</a></li>
                                     </ul>
                                 </li>
                         </div>

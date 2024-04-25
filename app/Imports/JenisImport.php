@@ -2,19 +2,22 @@
 
 namespace App\Imports;
 
-use App\Models\Jenis;
+use App\Models\jenis;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\ToCollection;
+use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class jenisImport implements ToCollection, WithHeadingRow
+class JenisImport implements ToModel, WithHeadingRow
 {
-    public function collection(Collection $rows)
+    public function headingRow()
     {
-        foreach ($rows as $row) {
-            Jenis::create([
-                'nama_jenis' => $row['nama_jenis'],
-            ]);
-        }
+        return 3;
+    }
+    public function model(array $rows)
+    {
+        return new jenis([
+            'nama_jenis' => $rows['nama_jenis'],
+        ]);
     }
 }

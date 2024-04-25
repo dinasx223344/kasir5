@@ -42,6 +42,9 @@
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
                                     <i class=" fa fa-file-excel"></i> Import
                                 </button>
+                                <a href="{{ route('export-jenis-pdf') }}" class="btn btn-danger">
+                                    <i class=" fa fa-file-pdf"></i> PDF
+                                </a>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -100,7 +103,7 @@
         e.preventDefault()
         const data = $(this).closest('tr').find('td:eq(1)').text()
         Swal.fire({
-            title: `Apakah  <span style="color:red">${data}</span> akan dihapus?`,
+            title: `Apakah data&nbsp<span style="color:red">${data}</span>&nbspakan dihapus?`,
             text: "Data tidak bisa dikembalikan!",
             icon: 'warning',
             showCancelButton: true,

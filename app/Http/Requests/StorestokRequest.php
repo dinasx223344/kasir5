@@ -14,15 +14,19 @@ class StorestokRequest extends FormRequest
         return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
     public function rules(): array
     {
         return [
-            //
+            'menu_id' => 'required',
+            'jumlah' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'menu_id.required' => 'Data Nomor Meja belum diisi',
+            'jumlah.required' => 'Data Jumlah belum diisi',
         ];
     }
 }

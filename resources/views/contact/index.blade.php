@@ -1,4 +1,4 @@
-@extends('template/layout1')
+@extends('template/layout')
 
 @push('style')
 <style>
@@ -30,10 +30,11 @@
             <div class="col-md-12 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="card-title">Tentang Aplikasi</h3>
+                        <h3 class="card-title">Contact Us</h3>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title">Sejarah Aplikasi</h5>
+                        <img src="smk.jpg" alt="Foto Kantor">
+                        <!-- <h5 class="card-title">Sejarah Aplikasi</h5>
                         <p>Aplikasi ini dibuat di Tahun 2024 sebagai salah satu syarat untuk mengikuti Ujian Kompetensi 
                             Keahlian di Jurusan Perangkat Lunak</p>
                         <hr>
@@ -41,13 +42,7 @@
                         <p>JHDISHEBI</p>
                         <hr>
                         <h5 class="card-title">Layanan Aplikasi</h5>
-                        <p>JHDISHEBI</p>
-                        <hr>
-                        <h5 class="card-title">Layanan Aplikasi</h5>
-                        <p>JHDISHEBI</p>
-                        <hr>
-                        <h5 class="card-title">Layanan Aplikasi</h5>
-                        <p>JHDISHEBI</p>
+                        <p>JHDISHEBI</p> -->
                     </div>
                 </div>
             </div>

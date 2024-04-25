@@ -12,12 +12,11 @@ use App\Exports\PelangganExport;
 use App\Imports\PelangganImport;
 use Illuminate\Http\Request;
 use PDOException;
+use PDF;
 
 class pelangganController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+  
     public function index()
     {
         $data['title'] = 'pelanggan';
@@ -25,42 +24,13 @@ class pelangganController extends Controller
         return view('pelanggan.index')->with($data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StorepelangganRequest $request)
     {
         pelanggan::create($request->all());
         return redirect('pelanggan')->with('success', 'Data pelanggan berhasil di tambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(pelanggan $pelanggan)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(pelanggan $pelanggan)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+   
     public function update(UpdatepelangganRequest $request, string $id)
     {
         $pelanggan = pelanggan::find($id)->update($request->all());
@@ -86,5 +56,12 @@ class pelangganController extends Controller
     {
         Excel::import(new PelangganImport, $request->import);
         return redirect()->back()->with('success', 'Import data jenis berhasil');
+    }
+
+    public function generatepdf()
+    {
+        $pelanggan = pelanggan::all();
+        $pdf = Pdf::loadView('pelanggan.table', compact('pelanggan'));
+        return $pdf->download('pelanggan.pdf');
     }
 }

@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MejaExport;
 use App\Models\meja;
 use App\Http\Requests\StoremejaRequest;
 use App\Http\Requests\UpdatemejaRequest;
+use App\Imports\KategoriImport;
+use App\Imports\MejaImport;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class MejaController extends Controller
 {
@@ -35,37 +41,34 @@ class MejaController extends Controller
         return redirect('meja')->with('success', 'Data meja berhasil di tambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(meja $meja)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(meja $meja)
-    {
-       //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(UpdatemejaRequest $request, string $id)
     {
         $meja = meja::find($id)->update($request->all());
         return redirect('meja')->with('success', 'Update data berhasil');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(meja $meja, string $id)
+    public function destroy($id)
     {
         meja::find($id)->delete();
-        return redirect('meja')->with('success', 'Data jenis berhasil dihapus!');
+        return redirect('meja')->with('success', 'Data kategori berhasil dihapus!');
+    }
+
+    public function exportData()
+    {
+        $date = date('Y-m-d');
+        return Excel::download(new MejaExport, $date . '_meja.xlsx');
+    }
+
+    public function importData(Request $request)
+    {
+        Excel::import(new MejaImport, $request->import);
+        return redirect()->back()->with('success', 'Import data meja berhasil');
+    }
+
+    public function generatepdf()
+    {
+        $meja = meja::all();
+        $pdf = Pdf::loadView('meja.table', compact('meja'));
+        return $pdf->download('meja.pdf');
     }
 }

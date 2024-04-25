@@ -69,9 +69,8 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-user"></i> CASHIER <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{ url('/pemesanan') }}">Transaksi</a></li>
-                                        <li><a href="{{ url('/produk_titipan') }}">Produk Titipan</a></li>
-                                        <li><a href="{{ url('/about') }}">Tentang Aplikasi</a></li>
+                                        <li><a href="{{ url('/pemesanan') }}">Pemesanan</a></li>
+                                        <!-- <li><a href="{{ url('/produk_titipan') }}">Produk Titipan</a></li> -->
                                     </ul>
                                 </li>
                         </div>

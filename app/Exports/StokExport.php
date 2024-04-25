@@ -4,10 +4,11 @@ namespace App\Exports;
 
 use App\Models\Stok;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Events\AfterSheet;
 
-class StokExport implements FromCollection, WithHeadings
+class StokExport implements FromCollection, WithHeadings, WithEvents
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -21,9 +22,9 @@ class StokExport implements FromCollection, WithHeadings
     {
         return [
             'No.',
-            'menu',
+            'menu_id',
             'jumlah',
-            'tanggal inpit',
+            'tanggal input',
             'tanggal update'
         ];
     }
@@ -32,18 +33,19 @@ class StokExport implements FromCollection, WithHeadings
     {
         return [
             AfterSheet::class  => function (AfterSheet $event) {
-                $event->sheet->grtColumnDimension('A')->setAutoSize(true);
-                $event->sheet->grtColumnDimension('B')->setAutoSize(true);
-                $event->sheet->grtColumnDimension('C')->setAutoSize(true);
-                $event->sheet->grtColumnDimension('D')->setAutoSize(true);
+                $event->sheet->getColumnDimension('A')->setAutoSize(true);
+                $event->sheet->getColumnDimension('B')->setAutoSize(true);
+                $event->sheet->getColumnDimension('C')->setAutoSize(true);
+                $event->sheet->getColumnDimension('D')->setAutoSize(true);
+                $event->sheet->getColumnDimension('E')->setAutoSize(true);
 
-                $event->sheet->insertNewRoeBefore(1, 2);
-                $event->sheet->mergeCells('A1, D1');
+                $event->sheet->insertNewRowBefore(1, 2);
+                $event->sheet->mergeCells('A1:E1');
                 $event->sheet->setCellValue('A1', 'Data Stok');
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
-                $event->sheet->getStyle('A3:D' . $event->sheet->getHighestRow())->applyFromArray([
+                $event->sheet->getStyle('A3:E' . $event->sheet->getHighestRow())->applyFromArray([
                     'borders' => [
                         'allBorders' => [
                             'borderStyle' => \phpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,

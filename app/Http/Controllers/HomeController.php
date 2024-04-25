@@ -16,9 +16,9 @@ class HomeController extends Controller
         return view('template.layout');
     }
 
-    public function about()
+    public function contact()
     {
-        return view('about.index');
+        return view('contact.index');
     }
 
     

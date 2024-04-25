@@ -7,6 +7,7 @@
                     <th>Nomor Meja</th>
                     <th>Kapasitas</th>
                     <th>Status</th>
+                    <th>Tools</th>
                 </tr>
             </thead>
             <tbody>

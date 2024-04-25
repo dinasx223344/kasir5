@@ -34,14 +34,17 @@
                             <h2>Meja</h2>
                             <div class="float-right ml-auto">
                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalFormMeja">
-                                    Tambah Meja
+                                    Tambah meja
                                 </button>
-                                <!-- <a href="{{ route('export-jenis') }}" class="btn btn-success">
+                                <a href="{{ route('export-meja') }}" class="btn btn-success">
                                     <i class=" fa fa-file-excel"></i> Export
                                 </a>
                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#formImport">
                                     <i class=" fa fa-file-excel"></i> Import
-                                </button> -->
+                                </button>
+                                <a href="{{ route('export-meja-pdf') }}" class="btn btn-danger">
+                                    <i class=" fa fa-file-pdf"></i> Export
+                                </a>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -85,7 +88,7 @@
 
 @push('script')
 <script>
-    // $('#tbl-jenis').DataTable()
+    // $('#tbl-kategori').DataTable()
 
     $('.alert-success').fadeTo(2000, 500).slideUp(500, function() {
         $('.alert-success').slideUp(500)
@@ -100,7 +103,7 @@
         e.preventDefault()
         const data = $(this).closest('tr').find('td:eq(1)').text()
         Swal.fire({
-            title: `Apakah  <span style="color:red">${data}</span> akan dihapus?`,
+            title: `Apakah data&nbsp<span style="color:red">${data}</span>&nbspakan dihapus?`,
             text: "Data tidak bisa dikembalikan!",
             icon: 'warning',
             showCancelButton: true,
@@ -126,12 +129,12 @@
             console.log(nomor_meja)
             modal.find('.modal-title').text('Edit Data Meja')
             modal.find('#nomor_meja').val(nomor_meja)
-            modal.find('#kapasitas').val(nomor_meja)
-            modal.find('#status').val(nomor_meja)
+            modal.find('#kapasitas').val(kapasitas)
+            modal.find('#status').val(status)
             modal.find('.modal-body form').attr('action', '{{ url("meja")}}/' + id)
             modal.find('#method').html('@method("PATCH")')
         } else {
-            modal.find('.modal-title').text('Input Data Meja')
+            modal.find('.modal-title').text('Input Data kategori')
             modal.find('#nomor_meja').val('')
             modal.find('#kapasitas').val('')
             modal.find('#status').val('')

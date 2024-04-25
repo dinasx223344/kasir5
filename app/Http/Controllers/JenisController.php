@@ -11,8 +11,9 @@ use App\Exports\JenisExport as ExportsJenisExports;
 use PDOException;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\JenisExport;
-use App\Imports\jenisImport;
+use App\Imports\JenisImport;
 use Illuminate\Http\Request;
+use PDF;
 
 class jenisController extends Controller
 {
@@ -80,12 +81,19 @@ class jenisController extends Controller
     public function exportData()
     {
         $date = date('Y-m-d');
-        return Excel::download(new JenisExport, $date . '_jenis.xlsx');
+        return Excel::download(new JenisExport , $date . '_jenis.xlsx');
     }
 
     public function importData(Request $request)
     {
-        Excel::import(new jenisImport, $request->import);
+        Excel::import(new JenisImport, $request->import);
         return redirect()->back()->with('success', 'Import data jenis berhasil');
+    }
+
+    public function generatepdf()
+    {
+        $jenis = jenis::all();
+        $pdf = Pdf::loadView('jenis.table', compact('jenis'));
+        return $pdf->download('jenis.pdf');
     }
 }

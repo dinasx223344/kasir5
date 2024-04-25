@@ -22,7 +22,20 @@ class StorepelangganRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama' => 'required',
+            'email' => 'required',
+            'no_telp' => 'required',
+            'alamat' => 'required'
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nama.required' => 'Data Nama Pelanggan belum diisi',
+            'email.required' => 'Data Email belum diisi',
+            'no_telp.required' => 'Data No Telepon belum diisi',
+            'alamat.required' => 'Data Alamat belum diisi'
         ];
     }
 }

@@ -2,38 +2,41 @@
 
 namespace App\Exports;
 
-
 use App\Models\pelanggan;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\FromCollection;
-use Maatwebsite\Excel\Events\AfterSheet;
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\WithEvents;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\Events\BeforeExport;
-use \Maatwebsite\Excel\Sheet;
+use Maatwebsite\Excel\Events\AfterSheet;
+use Maatwebsite\Excel\Facades\Excel as FacadesExcel;
 
-
-class PelangganExport implements FromCollection, WithHeadings
+class PelangganExport implements FromCollection, WithHeadings, WithEvents
 {
     /**
      * @return \Illuminate\Support\Collection
      */
-
     public function collection()
     {
-        return pelanggan::all();
+        return pelanggan::get();
     }
 
+    // public function exportData()
+    // {
+    //     $date = date('Y-m-d');
+    //     return Excel::download(new JenisExport, $date . '_meja.xlsx');
+    // }
     public function headings(): array
     {
         return [
-            'No',
-            'nama',
-            'email',
-            'no_telp',
-            'alamat',
-            'tanggal input',
-            'tanggal update'
+            'Id',
+            'Nama ',
+            'Email',
+            'No Telp',
+            'Alamat',
+            'Tanggal Input',
+            'Tanggal Update',
         ];
     }
 
@@ -41,24 +44,24 @@ class PelangganExport implements FromCollection, WithHeadings
     {
         return [
             AfterSheet::class  => function (AfterSheet $event) {
-                $event->sheet->grtColumnDimension('A')->setAutoSize(true);
-                $event->sheet->grtColumnDimension('B')->setAutoSize(true);
-                $event->sheet->grtColumnDimension('C')->setAutoSize(true);
-                $event->sheet->grtColumnDimension('D')->setAutoSize(true);
-                $event->sheet->grtColumnDimension('E')->setAutoSize(true);
-                $event->sheet->grtColumnDimension('F')->setAutoSize(true);
-                $event->sheet->grtColumnDimension('G')->setAutoSize(true);
+                $event->sheet->getColumnDimension('A')->setAutoSize(true);
+                $event->sheet->getColumnDimension('B')->setAutoSize(true);
+                $event->sheet->getColumnDimension('C')->setAutoSize(true);
+                $event->sheet->getColumnDimension('D')->setAutoSize(true);
+                $event->sheet->getColumnDimension('E')->setAutoSize(true);
+                $event->sheet->getColumnDimension('F')->setAutoSize(true);
+                $event->sheet->getColumnDimension('G')->setAutoSize(true);
 
-                $event->sheet->insertNewRoeBefore(1, 2);
-                $event->sheet->mergeCells('A1, G1');
-                $event->sheet->setCellValue('A1', 'Data Menu');
+                $event->sheet->insertNewRowBefore(1, 2);
+                $event->sheet->mergeCells('A1:G1');
+                $event->sheet->setCellValue('A1', 'DATA PELANGGAN');
                 $event->sheet->getStyle('A1')->getFont()->setBold(true);
                 $event->sheet->getStyle('A1')->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
 
                 $event->sheet->getStyle('A3:G' . $event->sheet->getHighestRow())->applyFromArray([
                     'borders' => [
                         'allBorders' => [
-                            'borderStyle' => \phpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                            'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
                             'color' => ['argb' => '000000']
                         ]
                     ]

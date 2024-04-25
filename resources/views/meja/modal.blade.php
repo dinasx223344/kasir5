@@ -26,10 +26,13 @@
           <div class="form-group row">
             <label for="staticEmail" class="col-sm-4 col-form-label">Status</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" id="status" value="" name="status">
+              <select name="status" id="status" class="form-control">
+                {{-- <option value="">Status</option> --}}
+                <option value="reservasi">Reservasi</option>
+                <option value="kosong">Kosong</option>
+              </select>
             </div>
           </div>
-
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -40,20 +43,21 @@
   </div>
 </div>
 
+
 <div class="modal fade" id="formImport" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Import Data Paket</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title" id="exampleModalLabel">Import Data Meja</h5> <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form method="POST" action="{{ route('import-jenis') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('import-meja') }}" enctype="multipart/form-data">
           @csrf
           <div class="card-body">
             <div class="form-group">
-              <label for="jenis">File Excel</label>
+              <label for="meja">File Excel</label>
               <input type="file" name="import" id="import">
             </div>
             <div class="modal-footer">

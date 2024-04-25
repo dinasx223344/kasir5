@@ -54,7 +54,7 @@
           @csrf
           <div class="card-body">
             <div class="form-group">
-              <label for="jenis">File Excel</label>
+              <label for="jenis">File Excel</label> 
               <input type="file" name="import" id="import">
             </div>
             <div class="modal-footer">
