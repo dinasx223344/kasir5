@@ -13,6 +13,7 @@
 
     <!-- Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('adminlte3')}}/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
     <link href="{{ asset('sweetalert2') }}/sweetalert2.min.css" rel="stylesheet">
     <link href="{{ asset('template') }}/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -64,20 +65,37 @@
                     <!-- sidebar menu -->
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
-                            <h3>General</h3>
+                            <h3>Dina</h3>
                             <ul class="nav side-menu">
+                                @if (Auth::user()->level == 1)
                                 <li><a><i class="fa fa-user"></i> ADMIN <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="{{ url('/kategori') }}">Kategori</a></li>
+                                        <!-- <li><a href="{{ url('/kategori') }}">Kategori</a></li> -->
                                         <li><a href="{{ url('/jenis') }}">Jenis</a></li>
                                         <li><a href="{{ url('/menu') }}">Menu</a></li>
                                         <li><a href="{{ url('/stok') }}">Stok</a></li>
-                                        <li><a href="{{ url('/pelanggan') }}">Pelanggan</a></li>
-                                        <li><a href="{{ url('/meja') }}">Meja</a></li>
-                                        <li><a href="{{ url('/absensi') }}">Absensi Karyawan</a></li>
-                                        <li><a href="{{ url('/contact') }}">Contact Us</a></li>
+                                        <!-- <li><a href="{{ url('/pelanggan') }}">Pelanggan</a></li> -->
+                                        <!-- <li><a href="{{ url('/meja') }}">Meja</a></li> -->
+                                        <!-- <li><a href="{{ url('/absensi') }}">Absensi Karyawan</a></li>
+                                        <li><a href="{{ url('/contact') }}">Contact Us</a></li> -->
                                     </ul>
                                 </li>
+                                @endif
+                                @if (Auth::user()->level == 2)
+                                <li><a><i class="fa fa-user"></i> KASIR <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ url('/pemesanan') }}">Pemesanan</a></li>
+                                        <li><a href="{{ url('/pelanggan') }}">Pelanggan</a></li>
+                                    </ul>
+                                </li>
+                                @endif
+                                @if (Auth::user()->level == 3)
+                                <li><a><i class="fa fa-user"></i> OWNER <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a href="{{ url('/laporan') }}">Laporan</a></li>
+                                    </ul>
+                                </li>
+                                @endif
                         </div>
 
                     </div>

@@ -1,4 +1,4 @@
-@extends('template/layout1')
+@extends('template/layout')
 
 @push('style')
 <!-- Tambahkan style khusus di sini jika diperlukan -->
@@ -33,7 +33,7 @@
 
                     <!-- Daftar orderan yang sedang diproses -->
                     <div class="row">
-                        {{-- <div class="col-md-8">
+                        {{-- <div class="col-md-7">
                                 <div class="x_panel">
                                     <div class="x_title">
                                         <h2>Daftar Menu</h2>
@@ -56,19 +56,21 @@
                                     <!-- Tabel daftar orderan -->
                                     <ul class="menu-container">
                                         @foreach ($jenis as $j)
-                                        <li>
-                                            <h3>{{ $j->nama_jenis }}</h3>
+                                        <h3>{{ $j->nama_jenis }}</h3>
+                                        <li style="overflow:auto">
                                             <ul class="menu-item" style="cursor: pointer;">
                                                 @foreach ($j->menu as $menu)
-                                                <li data-harga="{{ $menu->harga }}" data-id="{{ $menu->id }}">
-                                                    <img width="50px" src="{{ asset('images') }}/{{ $menu->image }}" alt="">
-
-                                                    <div>
-                                                        Nama: {{ $menu->nama_menu }}<br />
-                                                        
-                                                        Deskripsi: {{ $menu->deskripsi }}<br />
-                                                    </div>
-
+                                                <li @if (!isset($menu->stok) || $menu->stok->count() < 1 || $menu->stok->jumlah < 1) style="pointer-events: none; opacity: .8" @endif data-harga="{{ $menu->harga }}" data-id="{{ $menu->id }}" data-image="{{ $menu->image }}">
+                                                            <img width="50" src="{{ asset('images') }}/{{ $menu->image }}" alt="">
+                                                            <div style="font-family: calibri;">
+                                                                Nama: {{ $menu->nama_menu }}<br>
+                                                                @if (isset($menu->stok) && $menu->stok->count() > 0 && $menu->stok->jumlah > 0)
+                                                                Stok: {{ $menu->stok->jumlah }}<br>
+                                                                @else
+                                                                Stok tidak tersedia<br>
+                                                                @endif
+                                                                Deskripsi: {{ $menu->deskripsi }}
+                                                            </div>
                                                 </li>
                                                 @endforeach
                                             </ul>

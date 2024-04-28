@@ -36,6 +36,9 @@ class UserController extends Controller
                 case '2':
                     return redirect()->intended('/pemesanan');
                     break;
+                case '3':
+                    return redirect()->intended('/laporan');
+                    break;
             }
             return redirect()->intended('/');
         }

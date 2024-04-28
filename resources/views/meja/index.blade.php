@@ -88,7 +88,7 @@
 
 @push('script')
 <script>
-    // $('#tbl-kategori').DataTable()
+    $('#tbl-meja').DataTable()
 
     $('.alert-success').fadeTo(2000, 500).slideUp(500, function() {
         $('.alert-success').slideUp(500)

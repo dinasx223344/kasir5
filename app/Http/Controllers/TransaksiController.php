@@ -6,6 +6,8 @@ use App\Models\transaksi;
 use App\Http\Requests\StoretransaksiRequest;
 use App\Http\Requests\UpdatetransaksiRequest;
 use App\Models\detailTransaksi;
+use App\Models\menu;
+use App\Models\pemesanan;
 use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
@@ -52,6 +54,11 @@ class TransaksiController extends Controller
             // input detail transaksi
             foreach ($request->orderedList as $detail) {
                 //dd($requuest);
+                $menu = menu::find($detail['id']);
+                if ($menu) {
+                    $menu->stok->jumlah = $menu->stok->jumlah - $detail['qty'];
+                    $menu->stok->save();
+                }
                 $insertDetailTransaksi = detailTransaksi::create([
                     'transaksi_id' => $notrans,
                     'menu_id' => $detail['id'],
@@ -78,37 +85,5 @@ class TransaksiController extends Controller
         } catch (Exception | QueryException | PDOException $e) {
             return response()->json(['status' => false, 'message' => 'Pemesanan gagal']);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(transaksi $transaksi)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(transaksi $transaksi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdatetransaksiRequest $request, transaksi $transaksi)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(transaksi $transaksi)
-    {
-        //
     }
 }

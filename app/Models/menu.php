@@ -19,6 +19,6 @@ class menu extends Model
 
     function stok()
     {
-        return $this->hasMany(stok::class, 'menu_id', 'id');
+        return $this->hasOne(stok::class, 'menu_id');
     }
 }

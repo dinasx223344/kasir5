@@ -126,4 +126,5 @@ class menuController extends Controller
         // Return the PDF as a download
         return $dompdf->stream('menu.pdf');
     }
+    
 }

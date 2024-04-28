@@ -65,10 +65,14 @@ class MejaController extends Controller
         return redirect()->back()->with('success', 'Import data meja berhasil');
     }
 
-    public function generatepdf()
+    public function generatePDF()
     {
-        $meja = meja::all();
-        $pdf = Pdf::loadView('meja.table', compact('meja'));
-        return $pdf->download('meja.pdf');
+        // Data untuk ditampilkan dalam PDF
+        $data = meja::all();
+
+        // Render view ke HTML
+        $pdf = PDF::loadView('meja/meja-pdf', ['meja' => $data]);
+        $date = date('Y-m-d');
+        return $pdf->download($date . '-data-meja.pdf');
     }
 }
