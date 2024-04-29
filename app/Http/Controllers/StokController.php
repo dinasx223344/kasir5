@@ -13,6 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\StokExport;
 use App\Imports\StokImport;
 use Illuminate\Http\Request;
+use PDF;
 
 class StokController extends Controller
 {
@@ -79,11 +80,15 @@ class StokController extends Controller
         return redirect()->back()->with('success', 'Import data stok berhasil');
     }
 
-    public function generatepdf()
+    public function generatePDF()
     {
-        $stok = stok::all();
-        $pdf = Pdf::loadView('stok.table', compact('stok'));
-        return $pdf->download('stok.pdf');
+        // Data untuk ditampilkan dalam PDF
+        $data = stok::all();
+
+        // Render view ke HTML
+        $pdf = PDF::loadView('stok/stok-pdf', ['stok' => $data]);
+        $date = date('Y-m-d');
+        return $pdf->download($date . '-data-stok.pdf');
     }
 }
        

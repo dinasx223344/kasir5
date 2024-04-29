@@ -3,6 +3,7 @@
 use App\Exports\KategoriExport;
 use App\Http\Controllers\absensiController;
 use App\Http\Controllers\DetailTransaksiController;
+use App\Http\Controllers\grafikController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\jenisController;
@@ -18,6 +19,8 @@ use App\Http\Controllers\TransaksiController;
 use App\Http\Controllers\UserController;
 use App\Imports\absensiImport;
 use App\Models\absensi;
+use App\Models\detailTransaksi;
+use Database\Factories\DetailTransaksiFactory;
 
 //login
 Route::get("/login", [UserController::class, 'index'])->name('login');
@@ -32,34 +35,35 @@ Route::group(['middleware' => 'auth'], function () {
     //admin
     Route::group(['middleware' => ['cekUserLogin:1']], function () {
         Route::resource('/absensi', absensiController::class);
-        Route::resource('/kategori', KategoriController::class);
+        // Route::resource('/kategori', KategoriController::class);
         Route::resource('/jenis', jenisController::class);
         Route::resource('/menu', menuController::class);
         Route::resource('/stok', StokController::class);
-        Route::resource('/meja', MejaController::class);
+        // Route::resource('/meja', MejaController::class);
+        Route::resource('grafik', grafikController::class);
 
         //export excell
         Route::get('export/absensi', [absensiController::class, 'exportData'])->name('export-absensi');
         Route::get('export/jenis', [jenisController::class, 'exportData'])->name('export-jenis');
-        Route::get('export/kategori', [KategoriController::class, 'exportData'])->name('export-kategori');
+        // Route::get('export/kategori', [KategoriController::class, 'exportData'])->name('export-kategori');
         Route::get('export/menu', [menuController::class, 'exportData'])->name('export-menu');
         Route::get('export/stock', [StokController::class, 'exportData'])->name('export-stok');
-        Route::get('export/meja', [MejaController::class, 'exportData'])->name('export-meja');
+        // Route::get('export/meja', [MejaController::class, 'exportData'])->name('export-meja');
 
         //import excell
         Route::post('jenis/import', [jenisController::class, 'importData'])->name('import-jenis');
         Route::post('menu/import', [menuController::class, 'importData'])->name('import-menu');
         Route::post('stok/import', [StokController::class, 'importData'])->name('import-stok');
-        Route::post('kategori/import', [KategoriController::class, 'importData'])->name('import-kategori');
-        Route::post('meja/import', [MejaController::class, 'importData'])->name('import-meja');
-        Route::post('absensi/import', [absensiController::class, 'importData'])->name('import-absensi');
+        // Route::post('kategori/import', [KategoriController::class, 'importData'])->name('import-kategori');
+        // Route::post('meja/import', [MejaController::class, 'importData'])->name('import-meja');
+        // Route::post('absensi/import', [absensiController::class, 'importData'])->name('import-absensi');
 
         //export pdf
-        Route::get('export/kategori/pdf', [KategoriController::class, 'generatepdf'])->name('export-kategori-pdf');
+        // Route::get('export/kategori/pdf', [KategoriController::class, 'generatepdf'])->name('export-kategori-pdf');
         Route::get('export/jenis/pdf', [jenisController::class, 'generatepdf'])->name('export-jenis-pdf');
-        Route::get('export/absensi/pdf', [absensiController::class, 'generatepdf'])->name('export-absensi-pdf');
+        // Route::get('export/absensi/pdf', [absensiController::class, 'generatepdf'])->name('export-absensi-pdf');
         Route::get('export/stok/pdf', [StokController::class, 'generatepdf'])->name('export-stok-pdf');
-        Route::get('export/meja/pdf', [MejaController::class, 'generatepdf'])->name('export-meja-pdf');
+        // Route::get('export/meja/pdf', [MejaController::class, 'generatepdf'])->name('export-meja-pdf');
         Route::get('export/menu/pdf', [menuController::class, 'generatepdf'])->name('export-menu-pdf');
 
     });
@@ -82,7 +86,9 @@ Route::group(['middleware' => 'auth'], function () {
     //owner
     Route::group(['middleware' => ['cekUserLogin:3']], function () {
         Route::resource('/laporan', DetailTransaksiController::class);
+        Route::get('export/laporan/pdf', [DetailTransaksiController::class, 'generatepdf'])->name('export-laporan-pdf');
+        Route::get('export/laporan', [DetailTransaksiController::class, 'exportData'])->name('export-laporan');
     });
 
-    Route::get("/contact", [HomeController::class, 'contact']);
+    // Route::get("/contact", [HomeController::class, 'contact']);
 });

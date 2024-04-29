@@ -122,6 +122,7 @@ class menuController extends Controller
         $html = View::make('menu.table', compact('menu'))->render();
         $dompdf->loadHtml($html);
         $dompdf->render();
+        $pdf = PDF::loadView('menu/menu-pdf', ['menu' => $menu]);
 
         // Return the PDF as a download
         return $dompdf->stream('menu.pdf');

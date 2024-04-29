@@ -1,77 +1,144 @@
-<head>
-    <style>
-        @media print {
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+    }
 
-            /* Sembunyikan elemen yang tidak perlu dicetak */
-            body * {
-                visibility: hidden;
-            }
+    .container-box {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
 
-            /* Hanya menampilkan bagian yang ingin dicetak */
-            #printableArea,
-            #printableArea * {
-                visibility: visible;
-            }
+    .container-box h2,
+    .container-box h3 {
+        text-align: center;
+        margin-bottom: 10px;
+    }
 
-            /* Stil khusus untuk bagian yang ingin dicetak */
-            #printableArea {
-                position: absolute;
-                left: 0;
-                top: 0;
-            }
-        }
-    </style>
-</head>
+    .container-box table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .container-box table,
+    .container-box th,
+    .container-box td {
+        border: 3px solid transparent;
+    }
+
+    h2 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    h3 {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 5px;
+        text-align: center;
+    }
+
+    table {
+        width: 100%;
+        border-spacing: 0;
+        border-collapse: collapse;
+        margin: auto;
+    }
+
+    th,
+    td {
+        border: 1px solid transparent;
+        padding: 8px;
+        text-align: center;
+    }
+
+    th:first-child,
+    td:first-child {
+        padding-left: 20px;
+    }
+
+    th:last-child,
+    td:last-child {
+        padding-right: 20px;
+    }
+
+    thead {
+        background-color: #f5f5f5;
+    }
+
+    tfoot {
+        background-color: #f5f5f5;
+        font-weight: bold;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: #f0f0f0;
+    }
+
+    .alert {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+    .alert-danger {
+        background-color: #f2dede;
+        border-color: #ebccd1;
+        color: #a94442;
+    }
+</style>
 
 <body>
-    <div id="printableArea">
-        <!-- Konten yang ingin dicetak -->
-        <h2>C A F E</h2>
-        <h5>Jl. Siliwangi N0. 61 Cianjur</h5>
+    <div class="container-box">
+        <h2>Peace Cafe</h2>
+        <h3>Cianjur</h3>
         <hr>
 
         @if(isset($transaksi))
-        <h5>No. Faktur : {{$transaksi->id}} </h5>
-        <h5> {{$transaksi->tanggal}} </h5>
+        <h3>NO. FAKTUR : {{ $transaksi->id }}</h3>
+        <h3>Tanggal : {{ $transaksi->tanggal }}</h3>
 
-        <table>
+        <table border="0">
             <thead>
                 <tr>
-                    <th>Qty</th>
-                    <th>Item</th>
-                    <th>Harga</th>
-                    <th>Total</th>
+                    <td>Qty</td>
+                    <td>Item</td>
+                    <td>Harga</td>
+                    <td>Subtotal</td>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($transaksi->detailTransaksi as $item)
+                @foreach($transaksi->detailTransaksi as $item)
                 <tr>
-                    <td contenteditable="true">{{ $item->jumlah }}</td>
+                    <td>{{ $item->jumlah }}</td>
                     <td>{{ $item->menu->nama_menu }}</td>
-                    <td>{{ number_format($item->menu->harga, 0, ',', '.') }}</td>
-                    <td>{{ number_format($item->subtotal, 0, ',', '.') }}</td>
+                    <td>{{ number_format($item->menu->harga, 0, "," , ".") }}</td>
+                    <td>{{ number_format($item->subtotal, 0, "," , ".") }}</td>
                 </tr>
                 @endforeach
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3">Total</td>
-                    <td>{{ number_format($transaksi->total_harga, 0, ',', '.') }}</td>
+                    <td colspan="1">Total</td>
+                    <td></td>
+                    <td></td>
+                    <td colspan="4">{{ number_format($transaksi->total_harga,0,",",".") }}</td>
                 </tr>
             </tfoot>
         </table>
         @else
-        <p>No Transaction Found.</p>
+        <p>No transaction found.</p>
         @endif
     </div>
-
-    <!-- Tombol untuk mencetak -->
-    <button onclick="printPage()">Cetak</button>
-
-    <!-- Skrip untuk mencetak -->
-    <script>
-        function printPage() {
-            window.print();
-        }
-    </script>
 </body>

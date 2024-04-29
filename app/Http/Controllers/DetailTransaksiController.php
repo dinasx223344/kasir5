@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\LaporanExport;
 use App\Models\detailTransaksi;
 use App\Http\Requests\StoredetailTransaksiRequest;
 use App\Http\Requests\UpdatedetailTransaksiRequest;
+use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 
 class DetailTransaksiController extends Controller
 {
@@ -64,5 +67,22 @@ class DetailTransaksiController extends Controller
     public function destroy(detailTransaksi $detailTransaksi)
     {
         //
+    }
+
+    public function exportData()
+    {
+        $date = date('Y-m-d');
+        return Excel::download(new LaporanExport, $date . '_laporan.xlsx');
+    }
+
+    public function generatePDF()
+    {
+        // Data untuk ditampilkan dalam PDF
+        $data = detailTransaksi::all();
+
+        // Render view ke HTML
+        $pdf = PDF::loadView('laporan/laporan-pdf', ['detailTransaksi' => $data]);
+        $date = date('Y-m-d');
+        return $pdf->download($date . '-data-laporan.pdf');
     }
 }

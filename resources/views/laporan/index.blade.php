@@ -72,10 +72,10 @@
                             <div class="col-md-3"> <!-- Bagian kanan -->
                                 <div class="input-group">
                                     <div class="float-right ml-auto">
-                                        <a href="{{ route('export-jenis')}}" class="btn btn-success">
+                                        <a href="{{ route('export-laporan')}}" class="btn btn-success">
                                             <i class="fa fa-file-excel"></i> Export
                                         </a>
-                                        <a href="{{ route('export-jenis-pdf')}}" class="btn btn-danger ml-2">
+                                        <a href="{{ route('export-laporan-pdf')}}" class="btn btn-danger ml-2">
                                             <i class="fa fa-file-pdf"></i> Export PDF
                                         </a>
                                     </div>

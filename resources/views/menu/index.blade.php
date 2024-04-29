@@ -103,7 +103,7 @@
         e.preventDefault()
         const data = $(this).closest('tr').find('td:eq(1)').text()
         Swal.fire({
-            title: `Apakah data&nbsp<span style="color:red">${data}</span>&nbspakan dihapus?`,
+            title: `Apakah&nbsp<span style="color:red">${data}</span>&nbspakan dihapus?`,
             text: "Data tidak bisa dikembalikan!",
             icon: 'warning',
             showCancelButton: true,

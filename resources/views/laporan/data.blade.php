@@ -15,7 +15,7 @@
                 <tr>
                     <td>{{ $i = !isset ($i) ? ($i = 1) : ++$i }}</td>
                     <td>{{ $p->transaksi_id }}</td>
-                    <td>{{ $p->menu_id }}</td>
+                    <td>{{ $p->menu->nama_menu }}</td>
                     <td>{{ $p->jumlah }}</td>
                     <td>{{ $p->subtotal }}</td>
                 </tr>
