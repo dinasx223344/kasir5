@@ -15,7 +15,6 @@
                             <div class="col-md-6">
                                 <h3>
                                     PROJECT UJIKOM
-                                    <h3>CHASIER GACORAN</h3>
                                 </h3>
                             </div>
                             <div class="col-md-6 text-center"> <!-- Tanggal di tengah -->

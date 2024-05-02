@@ -64,11 +64,17 @@
                         <div class="clearfix"></div>
 
                         <div class="separator">
+                            <p class="change_link">New to site?
+                                <a href="#signup" class="to_register"> Create Account </a>
+                            </p>
 
                             <div class="clearfix"></div>
                             <br />
 
-                        </div>
+                            <div>
+                                <h1><i class="fa fa-paw"></i> PEACE CAFE</h1>
+                                <p>©2024 All Rights Reserved.</p>
+                            </div>
                     </form>
                 </section>
             </div>

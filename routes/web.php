@@ -41,6 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/stok', StokController::class);
         // Route::resource('/meja', MejaController::class);
         Route::resource('grafik', grafikController::class);
+        // Route::get('/grafik', 'grafikController@index')->name('grafik.index');
+
 
         //export excell
         Route::get('export/absensi', [absensiController::class, 'exportData'])->name('export-absensi');

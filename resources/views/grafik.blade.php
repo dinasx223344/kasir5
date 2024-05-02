@@ -24,16 +24,16 @@
                 </div>
                 <div class="animated flipInY col-lg-4 col-md-3 col-sm-6 ">
                     <div class="tile-stats">
-                        <div class="icon"><i class="fa-solid fa-chart-line"></i></i></div>
+                        <!-- <div class="icon"><i class="fa-solid fa-chart-line"></i></div> -->
                         <div class="count">{{$count_transaksi}}</div>
-                        <h3>Transaksi</h3>
+                        <h3>Transaksi Hari ini</h3>
                     </div>
                 </div>
                 <div class="animated flipInY col-lg-6 col-md-3 col-sm-6 ">
                     <div class="tile-stats">
-                        <div class="icon"><i class="fa-solid fa-money-bill-1-wave"></i></div>
+                        <!-- <div class="icon"><i class="fa-solid fa-money-bill-1-wave"></i></div> -->
                         <div class="count">Rp. {{ number_format($pendapatan, 0, ',', '.') }}</div>
-                        <h3>Pendapatan</h3>
+                        <h3>Pendapatan Hari Ini</h3>
                     </div>
                 </div>
             </div>
@@ -53,52 +53,49 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-                        <div class="col-md-9 col-sm-12 ">
+                        <div class="col-md-9 col-sm-12">
                             <div class="demo-container" style="height:280px">
                                 <div id="chart_plot_02" class="demo-placeholder"></div>
                             </div>
                             <div class="tiles">
                                 <div class="col-md-4 tile">
-                                    <span>Total Sessions</span>
-                                    <h2>231,809</h2>
+                                    <span>Total Transaksi</span>
+                                    <h2>{{ $count_transaksi }}</h2>
                                     <span class="sparkline11 graph" style="height: 160px;">
                                         <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
                                     </span>
                                 </div>
                                 <div class="col-md-4 tile">
-                                    <span>Total Revenue</span>
-                                    <h2>$231,809</h2>
+                                    <span>Total Pendapatan</span>
+                                    <h2>Rp. {{ number_format($pendapatan, 0, ',', '.') }}</h2>
                                     <span class="sparkline22 graph" style="height: 160px;">
                                         <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
                                     </span>
                                 </div>
                                 <div class="col-md-4 tile">
-                                    <span>Total Sessions</span>
-                                    <h2>231,809</h2>
+                                    <span>Total Pelanggan</span>
+                                    <h2>{{ $count_pelanggan }}</h2>
                                     <span class="sparkline11 graph" style="height: 160px;">
                                         <canvas width="200" height="60" style="display: inline-block; vertical-align: top; width: 94px; height: 30px;"></canvas>
                                     </span>
                                 </div>
                             </div>
-
                         </div>
 
-                        <div class="col-md-3 col-sm-12 ">
+                        <div class="col-md-3 col-sm-12">
                             <div>
                                 <div class="x_title">
                                     <h2>Pelanggan</h2>
                                     <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
+                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
+                                                <a class="dropdown-item" href="#">Pengaturan 1</a>
+                                                <a class="dropdown-item" href="#">Pengaturan 2</a>
                                             </div>
                                         </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
+                                        <li><a class="close-link"><i class="fa fa-close"></i></a></li>
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
@@ -111,21 +108,14 @@
                                         <div class="media-body">
                                             <a class="title">{{ $p->nama }}</a>
                                             <p><strong>{{ $p->email }}</strong> {{ $p->no_tlp }}</p>
-                                            <p> <small>{{ $p->alamat }}</small>
-                                            </p>
+                                            <p> <small>{{ $p->alamat }}</small></p>
                                         </div>
                                     </li>
                                     @endforeach
                                 </ul>
                             </div>
                         </div>
-
                     </div>
-                </div>
-            </div>
-        </div>
-
-
 
         <!-- <div class="row">
             <div class="col-md-12">
@@ -251,7 +241,7 @@
                                     <div class="media-body">
                                         <a class="title">{{ $p->menu->nama_menu}}</a>
                                         <p><strong>{{$p->jumlah}}</strong></p>
-                                        <p> <small>  </small>
+                                        <p> <small> </small>
                                     </div>
                                 </li>
                                 @endforeach
@@ -389,3 +379,30 @@
 
 </body>
 @endsection
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('chart_transaksi').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: json_encode($labels),
+            datasets: [{
+                label: 'Jumlah Transaksi',
+                data: json_encode($data) ,
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+</script>

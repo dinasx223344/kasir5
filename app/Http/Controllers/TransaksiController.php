@@ -57,7 +57,7 @@ class TransaksiController extends Controller
                 $menu = menu::find($detail['id']);
                 if ($menu) {
                     $menu->stok->jumlah = $menu->stok->jumlah - $detail['qty'];
-                    $menu->stok->save();
+                                                            $menu->stok->save();
                 }
                 $insertDetailTransaksi = detailTransaksi::create([
                     'transaksi_id' => $notrans,

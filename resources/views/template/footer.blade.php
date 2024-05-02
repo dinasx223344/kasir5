@@ -1,6 +1,6 @@
 <footer>
   <div class="pull-right">
-    JCafe copyright 2024 - <a href="https://colorlib.com">Colorlib</a>
+    PEACE CAFE copyright 2024 - <a href="https://colorlib.com">Colorlib</a>
   </div>
   <div class="clearfix"></div>
 </footer>
