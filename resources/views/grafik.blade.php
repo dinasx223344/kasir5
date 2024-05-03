@@ -33,7 +33,7 @@
                     <div class="tile-stats">
                         <!-- <div class="icon"><i class="fa-solid fa-money-bill-1-wave"></i></div> -->
                         <div class="count">Rp. {{ number_format($pendapatan, 0, ',', '.') }}</div>
-                        <h3>Pendapatan Hari Ini</h3>
+                        <h3>Pendapatan</h3>
                     </div>
                 </div>
             </div>

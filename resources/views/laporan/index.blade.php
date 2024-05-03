@@ -39,38 +39,9 @@
                                     <h3>Laporan</h3>
                                 </div>
                             </div>
-                            </br>
-                            <div class="col-md-3"> <!-- Bagian kiri -->
-                                <div class="input-group date" id="tanggalAwal" data-target-input="nearest">
-                                    <input type="date" class="form-control datetimepicker-input" data-target="#tanggalAwal" placeholder="Tanggal Awal" />
-                                    <div class="input-group-append" data-target="#tanggalAwal" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-1"> <!-- Tengah -->
-                                <h5 class="text-center">S/D</h5>
-                            </div>
-                            <div class="col-md-3"> <!-- Tengah -->
-                                <div class="input-group date" id="tanggalAkhir" data-target-input="nearest">
-                                    <input type="date" class="form-control datetimepicker-input" data-target="#tanggalAkhir" placeholder="Tanggal Akhir" />
-                                    <div class="input-group-append" data-target="#tanggalAkhir" data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-2"> <!-- Bagian kanan -->
-                                <div class="input-group">
-                                    <div class="float-left"> <!-- Tambah float-left -->
-                                        <button type="button" class="btn btn-danger">
-                                            <i class="fa fa-search"></i> Cari
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-3"> <!-- Bagian kanan -->
                                 <div class="input-group">
-                                    <div class="float-right ml-auto">
+                                    <div class="float-right ml-right">
                                         <a href="{{ route('export-laporan')}}" class="btn btn-success">
                                             <i class="fa fa-file-excel"></i> Export
                                         </a>
